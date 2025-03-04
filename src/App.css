@@ -6,7 +6,19 @@
 #root {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 0;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+}
+
+.left {
+  grid-column: 1 / 2;
+
+}
+
+.right {
+  grid-column: 2 / 3;
 }
 
 .section {
@@ -22,10 +34,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 20px;
-}
-
-.section-form {
-  display: grid;
+  max-height: 40px;
 }
 
 .dropDownBtn {
@@ -42,6 +51,11 @@
 
 .dropdownBtn:hover {
   cursor: pointer;
+}
+
+
+.section-form {
+  display: grid;
 }
 
 .form {
@@ -66,12 +80,25 @@
   color: black;
 }
 
-button {
-  background-color: transparent;
-  padding: 0px;
-}
-
 .submitBtn {
   background-color: var(--primary-color);
   padding: 10px;
+}
+
+.CV-general {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  color: black;
+  border: 1px solid red;
+}
+
+.CV-name {
+  font-size: 4rem;
+}
+
+.CV-info {
+  display: flex;
+  gap: 20px;
 }
