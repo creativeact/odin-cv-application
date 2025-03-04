@@ -3,7 +3,7 @@ function Form({ children, onSubmit }) {
       <>
         <form className="form" onSubmit={onSubmit}>
           {children}
-          <button type='submit' className='submitBtn'>Submit</button>
+          <button type='submit' className='submitBtn'>Update</button>
         </form>
       </>
     );
@@ -14,9 +14,9 @@ function Form({ children, onSubmit }) {
       <div className="form-item">
         <label htmlFor={input}>{label}</label>
         {type === "textarea" ? (
-        <textarea id={input} name={input} placeholder={placeholder}  value={value} onChange={onChange}></textarea>
+        <textarea id={input} name={input} placeholder={placeholder} value={value} onChange={onChange} ></textarea>
         ) : (
-        <input id={input} name={input} type={type} placeholder={placeholder} value={value} onChange={onChange}></input>
+        <input id={input} name={input} type={type} placeholder={placeholder} value={value} onChange={onChange} ></input>
         )}
       </div>
     );
