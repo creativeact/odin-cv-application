@@ -27,29 +27,43 @@ function CVGeneral({ generalInfo }) {
     );
 }
 
-function CVEducationItem({ educationInfo }) {
+function CVEducation({ educationInfo }) {
+    console.log('CVEducation received', educationInfo);
     return (
-        <div className="CV-education-item">
-            <span>{educationInfo.school || "School"}</span>
-            <span>{educationInfo.degree || "Degree"}</span>
-            <span>{educationInfo.startDate || "Start Date"}</span>
-            <span>{educationInfo.endDate || "End Date"}</span>
-            <span>{educationInfo.location || "Location"}</span>
+        <div className="CV-education">
+            <ul>
+                {educationInfo.map((educationItem) => (
+                    <li key={educationItem.key}>
+                         <p>{educationItem.school}</p>
+                         <p>{educationItem.degree}</p>
+                         <p>{educationItem.startDate}</p>
+                         <p>{educationItem.endDate}</p>
+                         <p>{educationItem.location}</p>
+                    </li>
+                ))}
+            </ul>
         </div>
     )
 }
 
-function CVExperienceItem({ experienceInfo }) {
+function CVExperience({ experienceInfo }) {
     return (
-        <div className="CV-experience-item">
-            <span>{experienceInfo.company || "Company"}</span>
-            <span>{experienceInfo.position || "Position"}</span>
-            <span>{experienceInfo.startDate || "Start Date"}</span>
-            <span>{experienceInfo.endDate || "End Date"}</span>
-            <span>{experienceInfo.location || "Location"}</span>
-            <span>{experienceInfo.description || "Description"}</span>
+        <div className="CV-education">
+            <ul>
+                {experienceInfo.map((experienceItem) => (
+                    <li key={experienceItem.key}>
+                         <p>{experienceItem.company}</p>
+                         <p>{experienceItem.position}</p>
+                         <p>{experienceItem.startDate}</p>
+                         <p>{experienceItem.endDate}</p>
+                         <p>{experienceItem.location}</p>
+                         <p>{experienceItem.description}</p>
+                    </li>
+                ))}
+
+            </ul>
         </div>
     )
 }
 
-export { CVGeneral, CVEducationItem, CVExperienceItem }
+export { CVGeneral, CVEducation, CVExperience }

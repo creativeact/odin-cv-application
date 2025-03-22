@@ -1,6 +1,7 @@
 :root {
   --primary-color: rgb(54, 54, 148);
   --secondary-color: lightgray;
+  --hover-color: rgb(74, 74, 193);
 }
 
 #root {
@@ -12,6 +13,10 @@
   gap: 50px;
 }
 
+ul {
+  list-style: none;
+}
+
 .left {
   grid-column: 1 / 2;
 
@@ -21,7 +26,8 @@
   grid-column: 2 / 3;
 }
 
-.section {
+/* Editor */
+.editor {
   background-color: white;
   color: black;
   display: flex;
@@ -29,7 +35,7 @@
   flex-direction: column;
 }
 
-.section-header {
+.editor-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -49,14 +55,30 @@
   width: 40px;
 }
 
-.dropdownBtn:hover {
+.dropdownBtn {
   cursor: pointer;
 }
 
+.general-editor-display {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px 0 40px;
+}
 
-.section-form {
+.editor-form {
   display: grid;
 }
+
+.hidden {
+  display: none;
+}
+
+.visible {
+  display: grid;
+}
+
+/* Forms */
 
 .form {
   background-color: lightgray;
@@ -80,12 +102,21 @@
   color: black;
 }
 
-.submitBtn {
+/* Buttons */
+
+.submitBtn, .editBtn, .addBtn, .removeBtn, .cancelBtn {
   background-color: var(--primary-color);
   padding: 10px;
 }
 
-.CV-general, .CV-education-item, .CV-experience-item {
+button:hover {
+  cursor: pointer;
+  background-color: var(--hover-color);
+}
+
+/* CV Display */
+
+.CV-general, .CV-education-item, .CV-experience-item, .CV-education {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -101,4 +132,19 @@
 .CV-info {
   display: flex;
   gap: 20px;
+}
+
+/* Pill */
+.pill {
+  background-color: var(--primary-color);
+  display: flex;
+  color: white;
+  justify-content: space-around;
+  width: 400px;
+  border-radius: 25px;
+}
+
+.pill:hover {
+  background-color: var(--hover-color);
+  cursor: pointer;
 }

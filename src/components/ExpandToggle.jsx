@@ -1,20 +1,20 @@
 import { useState } from 'react'
 
-function Dropdown({ onClick, isOpen }) {
+function DropdownIcon({ onClick, isOpen }) {
     return (
       <button className='dropDownBtn' onClick={onClick}>
         {isOpen ? (     
           <svg className='dropDownCloseIcon'
           xmlns="http://www.w3.org/2000/svg" 
           viewBox="0 0 24 24">
-          <title>section-close</title>
+          <title>editor-close</title>
           <path d="M7,15L12,10L17,15H7Z" />
         </svg>
         ) : (
         <svg className='dropDownOpenIcon'
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24">
-        <title>section-open</title>
+        <title>editor-open</title>
         <path d="M7,10L12,15L17,10H7Z" />
         </svg>
         )}
@@ -22,18 +22,20 @@ function Dropdown({ onClick, isOpen }) {
     )
   }
   
-  function Section({ title, children }) {
+  function ExpandToggle({ title, children }) {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
-      <div className="section">
-        <div className='section-header'>
+      <div className="editor">
+        <div className='editor-header'>
           <h2>{title}</h2>
-          <Dropdown onClick={() => setIsOpen(prev => !prev)} isOpen={isOpen} />
+          <DropdownIcon onClick={() => setIsOpen(prev => !prev)} isOpen={isOpen} />
         </div>
-        {isOpen && <div className="section-form">{children}</div>}
+        <div className={`editor-form ${isOpen ? 'visible' : 'hidden'}`}>
+          {children}
+        </div>
       </div>
     );
   }
 
-  export { Section }
+  export { ExpandToggle }

@@ -1,62 +1,79 @@
 import './App.css';
 import { useState } from 'react';
-import { useForm } from './useForm.jsx';
-import { Form, FormItem } from './components/Form.jsx';
-import { Section } from './components/Section.jsx';
-import { CVGeneral, CVEducationItem, CVExperienceItem } from './components/CV.jsx';
+import { ExpandToggle } from './components/ExpandToggle.jsx';
+import { GeneralEditor } from './components/GeneralEditor.jsx';
+import { EducationEditor } from './components/EducationEditor.jsx';
+import { ExperienceEditor } from './components/ExperienceEditor.jsx';
 
+import { CVGeneral, CVEducation, CVExperience } from './components/CV.jsx';
 
 
 function App() {
   const [generalInfo, setGeneralInfo] = useState({
-    fullName: "",
-    email: "",
-    phone: "",
-    city: "",
+    fullName: 'Monkey D. Luffy',
+    email: 'pirateking@gmail.com',
+    phone: '(123) 456-7890',
+    city: 'Orange Village, East Blue',
   });
 
-  const [educationInfo, setEducationInfo] = useState({
-    school: "",
-    degree: "",
-    startDate: "",
-    endDate: "",
-    location: "",
-  });
+  const [educationInfo, setEducationInfo] = useState([
+    {
+      key: crypto.randomUUID(),
+      school: 'Pirate University',
+      degree: 'Haki',
+      startDate: '01-01-1991',
+      endDate: '01-01-1994',
+      location: 'Grand Line',
+    },
+  ]);
 
-  const [experienceInfo, setExperienceInfo] = useState({
-    company: "",
-    position: "",
-    startDate: "",
-    endDate: "",
-    location: "",
-    description: "",
-  });
-
-  const generalForm = useForm(generalInfo, setGeneralInfo);
-  const educationForm = useForm(educationInfo, setEducationInfo);
-  const experienceForm = useForm(experienceInfo, setExperienceInfo);
+  const [experienceInfo, setExperienceInfo] = useState([
+    {
+      key: crypto.randomUUID(),
+      company: 'Straw Hat Pirates',
+      position: 'Captain',
+      startDate: '01-01-1991',
+      endDate: '01-01-1994',
+      location: 'Whole Cake Island',
+      description: 'Defeated the Big Mom Pirates with my Gum Gum Bazooka'
+    },
+  ]);
 
   return (
     <>
       <div className="left">
-        <Section title="General Information">
-          <Form onSubmit={generalForm.handleSubmit}>
-            <FormItem label="Full Name" input="fullName" placeholder="Enter full name" value={generalForm.formData.fullName} onChange={generalForm.handleChange} />
-            <FormItem label="Email" input="email" type="email" placeholder="Enter a valid email address" value={generalForm.formData.email} onChange={generalForm.handleChange}/>
-            <FormItem label="Phone" input="phone" type="tel" placeholder="(000)-000-0000" value={generalForm.formData.phone} onChange={generalForm.handleChange} />
-            <FormItem label="City" input="city" placeholder="e.g. Chicago, Illinois" value={generalForm.formData.city} onChange={generalForm.handleChange} />
-          </Form>
-        </Section>
-        <Section title="Education">
-          <Form onSubmit={educationForm.handleSubmit}>
-            <FormItem label="School" input="school" placeholder="Enter school / university" value={educationForm.formData.school} onChange={educationForm.handleChange} />
-            <FormItem label="Degree" input="degree" value={educationForm.formData.degree} onChange={educationForm.handleChange}/>
-            <FormItem label="Start Date" input="startDate" type="date" value={educationForm.formData.startDate} onChange={educationForm.handleChange} />
-            <FormItem label="End Date" input="endDate" type="date" value={educationForm.formData.endDate} onChange={educationForm.handleChange} />
-            <FormItem label="Location" input="location" value={educationForm.formData.location} onChange={educationForm.handleChange} />
-          </Form>
-        </Section>
-        <Section title="Experience">
+        <ExpandToggle title="General Information">
+          <GeneralEditor 
+            info={generalInfo}
+            setInfo={setGeneralInfo}
+          />
+        </ExpandToggle>
+        <ExpandToggle title="Education">
+          <EducationEditor
+            info={educationInfo}
+            setInfo={setEducationInfo}
+          />
+        </ExpandToggle>
+        <ExpandToggle title="Experience">
+          <ExperienceEditor
+            info={experienceInfo}
+            setInfo={setExperienceInfo}
+          />
+        </ExpandToggle>
+      </div>
+      <div className="right">
+        <CVGeneral generalInfo={generalInfo} />
+        <CVEducation educationInfo={educationInfo} />
+        <CVExperience experienceInfo={experienceInfo} />
+      </div>
+    </>
+  );
+}
+
+export default App
+
+{/*  
+   <Editor title="Experience">
           <Form onSubmit={experienceForm.handleSubmit}>
             <FormItem label="Company" input="company" value={experienceForm.formData.company} onChange={experienceForm.handleChange} />
             <FormItem label="Position" input="position" value={experienceForm.formData.position} onChange={experienceForm.handleChange}/>
@@ -65,19 +82,4 @@ function App() {
             <FormItem label="Location" input="location" value={experienceForm.formData.location} onChange={experienceForm.handleChange} />
             <FormItem label="Description" input="description" type="textarea" value={experienceForm.formData.description} onChange={experienceForm.handleChange} />
           </Form>
-        </Section>
-      </div>
-      <div className="right">
-        <CVGeneral generalInfo={generalInfo} />
-        <div className="CVEducation">
-          <CVEducationItem educationInfo={educationInfo} />
-        </div>
-        <div className="CVExperience">
-          <CVExperienceItem experienceInfo={experienceInfo} />
-        </div>
-      </div>
-    </>
-  );
-}
-
-export default App
+        </Editor> */}
