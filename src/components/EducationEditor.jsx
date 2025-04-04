@@ -39,7 +39,12 @@ function EducationEditor({ info, setInfo }) {
         setActiveKey(index);
     };
 
-    const handleCancelEdit = () => {
+    const handleCancelEdit = (originalItem) => {
+        setInfo((prevInfo) =>
+            prevInfo.map((item) =>
+                item.key === originalItem.key ? originalItem : item
+            )
+        );
         setActiveKey(null);
     }
 
@@ -55,30 +60,18 @@ function EducationEditor({ info, setInfo }) {
 
     return (
         <>
-            <div className="education-list">
-                <ul>
+            <>
+                <ul className="education-list">
                     {info.map((educationItem, index) => (
                         <li key={educationItem.key} className="education-item">
                             {activeKey === educationItem.key ? (
-                                <>
-                                    <EducationForm
-                                        educationItem={educationItem}
-                                        onChange={(e) => handleChange(index, e)}
-                                        onSubmit={handleSubmit}
-                                    />
-                                    <button
-                                    onClick={() => handleRemoveEducation(educationItem.key)}
-                                    className="removeBtn"
-                                    >
-                                        Remove
-                                    </button>
-                                    <button
-                                    onClick={handleCancelEdit}
-                                    className="cancelBtn"
-                                    >
-                                        Cancel
-                                    </button>
-                                </>
+                                <EducationForm
+                                    educationItem={educationItem}
+                                    onChange={(e) => handleChange(index, e)}
+                                    onSubmit={handleSubmit}
+                                    handleRemoveEducation={() => handleRemoveEducation(educationItem.key)}
+                                    handleCancelEdit={() => handleCancelEdit(educationItem)}
+                                />
                             ) : (
                                 <Pill
                                     title={educationItem.school}
@@ -89,12 +82,11 @@ function EducationEditor({ info, setInfo }) {
                             )}
                         </li>
                     ))}
+                     <button className="addBtn" onClick={handleAddEducation}>
+                        Add Education
+                    </button>
                 </ul>
-            </div>
-    
-            <button className="addBtn" onClick={handleAddEducation}>
-                Add Education
-            </button>
+            </>
         </>
     );
 }

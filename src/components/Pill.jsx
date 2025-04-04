@@ -1,4 +1,4 @@
-function Pill({title, endDate, handleEdit}) {
+function Pill({title, startDate, endDate, handleEdit}) {
     const handleClick = () => {
         handleEdit();
     }
@@ -8,7 +8,7 @@ function Pill({title, endDate, handleEdit}) {
             <p>{title}</p>
             
             <div className="dates">
-                <p>{endDate}</p>
+                {startDate} - {endDate}
             </div>
         </div>
     )

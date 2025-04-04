@@ -53,31 +53,19 @@ function ExperienceEditor({ info, setInfo }) {
     };
 
     return (
-        <>
-            <div className="experience-list">
-                <ul>
+        <div className="experience-editor">
+            <>
+                <ul className="experience-list">
                     {info.map((experienceItem, index) => (
                         <li key={experienceItem.key} className="experience-item">
                             {activeKey === experienceItem.key ? (
-                                <>
-                                    <ExperienceForm
-                                        experienceItem={experienceItem}
-                                        onChange={(e) => handleChange(index, e)}
-                                        onSubmit={handleSubmit}
-                                    />
-                                    <button
-                                    onClick={() => handleRemoveExperience(experienceItem.key)}
-                                    className="removeBtn"
-                                    >
-                                        Remove
-                                    </button>
-                                    <button
-                                    onClick={handleCancelEdit}
-                                    className="cancelBtn"
-                                    >
-                                        Cancel
-                                    </button>
-                                </>
+                                <ExperienceForm
+                                    experienceItem={experienceItem}
+                                    onChange={(e) => handleChange(index, e)}
+                                    onSubmit={handleSubmit}
+                                    handleRemoveExperience={() => handleRemoveExperience(experienceItem.key)}
+                                    handleCancelEdit={() => handleCancelEdit(experienceItem)}
+                                />
                             ) : (
                                 <Pill
                                     title={experienceItem.company}
@@ -89,12 +77,12 @@ function ExperienceEditor({ info, setInfo }) {
                         </li>
                     ))}
                 </ul>
-            </div>
+            </>
     
             <button className="addBtn" onClick={handleAddExperience}>
                 Add Experience
             </button>
-        </>
+        </div>
     );
 }
 

@@ -1,13 +1,30 @@
 import { useState } from 'react';
+import { DateInput } from './DateInput.jsx';
+import { RemoveButton } from './RemoveButton.jsx';
 
-function EducationForm({ educationItem, onSubmit }) {
+function EducationForm({ educationItem, onSubmit, handleRemoveEducation, handleCancelEdit }) {
     const [formData, setFormData] = useState({ ...educationItem });
 
-    const handleChange = (e) => {
-        setFormData({
-            ...formData,
-            [e.target.name]: e.target.value,
-        });
+    const formatDate = (date) => {
+        const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        return `${months[date.getMonth()]} ${date.getFullYear()}`;
+    };
+
+    const handleChange = (e, fieldName) => {
+        if (e instanceof Date) {
+            const formattedDate = formatDate(e);
+
+            setFormData({
+                ...formData,
+                [fieldName]: formattedDate,
+            });
+        }
+        else {
+            setFormData({
+                ...formData,
+                [e.target.name]: e.target.value
+            });
+        }
     };
 
     const handleSubmit = (e) => {
@@ -16,8 +33,8 @@ function EducationForm({ educationItem, onSubmit }) {
     };
 
     return (
-        <form className="form" onSubmit={handleSubmit}>
-            <div className="form-item">
+        <form className="education-form" onSubmit={handleSubmit}>
+            <div className="form-item school">
                 <label>School</label>
                     <input
                         type="text"
@@ -27,7 +44,7 @@ function EducationForm({ educationItem, onSubmit }) {
                         onChange={handleChange} 
                     />
             </div>
-            <div className="form-item">
+            <div className="form-item degree">
                 <label>Degree</label>
                     <input
                         type="text"
@@ -36,25 +53,21 @@ function EducationForm({ educationItem, onSubmit }) {
                         onChange={handleChange} 
                     />
             </div>
-            <div className="form-item">
+            <div className="form-item start">
                 <label>Start Date</label>
-                    <input
-                        type="date"
-                        name="startDate"
-                        value={formData.startDate}
-                        onChange={handleChange} 
-                    />
+                <DateInput
+                    selectedDate={formData.startDate}
+                    onChange={(date) => handleChange(date, "startDate")}
+                />
             </div>
-            <div className="form-item">
+            <div className="form-item end">
                 <label>End Date</label>
-                    <input
-                        type="date"
-                        name="endDate"
-                        value={formData.endDate}
-                        onChange={handleChange} 
-                    />
+                <DateInput
+                    selectedDate={formData.endDate}
+                    onChange={(date) => handleChange(date, "endDate")}
+                />
             </div>
-            <div className="form-item">
+            <div className="form-item location">
                 <label>Location</label>
                     <input
                         type="text"
@@ -63,7 +76,19 @@ function EducationForm({ educationItem, onSubmit }) {
                         onChange={handleChange} 
                     />
             </div>
-            <button type='submit' className='submitBtn'>Update</button>
+            <div className="formBtns">
+                <button type='submit' className='submitBtn'>Update</button>
+                <button
+                    type="button"
+                    onClick={handleCancelEdit}
+                    className="cancelBtn"
+                >
+                    Cancel
+                </button>
+                <RemoveButton 
+                    handleRemove={handleRemoveEducation}
+                />
+            </div>
         </form>
     );
 }

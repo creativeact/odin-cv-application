@@ -1,16 +1,12 @@
-/* function CV() {
+function CVDisplay({ generalInfo, educationInfo, experienceInfo }) {
     return (
-        <div className="CV-container">
-            <CVGeneral />
-            <div className="CV-education">
-                <span className="CV-section-header">Education</span>
-            </div>
-            <div className="CV-experience">
-                <span className="CV-section-header">Experience</span>
-            </div>
-        </div>
-    )
-} */
+     <div className="CV-container">
+         <CVGeneral generalInfo={generalInfo} />
+         <CVEducation educationInfo={educationInfo} />
+         <CVExperience experienceInfo={experienceInfo} />
+     </div>
+    );
+}
 
 function CVGeneral({ generalInfo }) {
     return (
@@ -29,6 +25,7 @@ function CVGeneral({ generalInfo }) {
 
 function CVEducation({ educationInfo }) {
     console.log('CVEducation received', educationInfo);
+    
     return (
         <div className="CV-education">
             <ul>
@@ -66,4 +63,4 @@ function CVExperience({ experienceInfo }) {
     )
 }
 
-export { CVGeneral, CVEducation, CVExperience }
+export { CVDisplay }

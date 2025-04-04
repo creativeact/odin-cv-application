@@ -1,29 +1,33 @@
 :root {
   --primary-color: rgb(54, 54, 148);
-  --secondary-color: lightgray;
+  --secondary-color: rgb(169, 169, 169);
+  --form-color: lightgray;
   --hover-color: rgb(74, 74, 193);
 }
 
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 20px;
+  margin: 0;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 50px;
+  grid-template-columns: 1fr 2fr;
+  gap: 30px;
+  height: 100vh;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 ul {
   list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 .left {
   grid-column: 1 / 2;
-
+  padding: 30px 15px 0px 40px;
 }
 
 .right {
   grid-column: 2 / 3;
+  background-color: rgb(223, 216, 208);
 }
 
 /* Editor */
@@ -31,43 +35,19 @@ ul {
   background-color: white;
   color: black;
   display: flex;
-  flex-grow: 1;
   flex-direction: column;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  overflow: hidden;
+  max-width: 570px;
 }
 
 .editor-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 20px;
-  max-height: 40px;
-}
-
-.dropDownBtn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-left: 5px;
-}
-
-.dropDownOpenIcon, .dropDownCloseIcon {
-  height: 40px;
-  width: 40px;
-}
-
-.dropdownBtn {
-  cursor: pointer;
-}
-
-.general-editor-display {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 40px 0 40px;
-}
-
-.editor-form {
-  display: grid;
+  padding: 0px 20px 0px 20px;
+  min-height: 20px;
 }
 
 .hidden {
@@ -75,31 +55,109 @@ ul {
 }
 
 .visible {
-  display: grid;
+  display: flex;
+}
+
+.editor-form {
+  flex-direction: column;
+  background-color: var(--secondary-color);
+  align-items: center;
+  padding: 20px 10px 10px 10px;
 }
 
 /* Forms */
-
-.form {
-  background-color: lightgray;
-  padding: 25px;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
 .form-item {
   display: grid;
+  grid-template-columns: 90px auto;
   grid-template-rows: auto auto;
   gap: 8px;
   padding-right: 20px;
+  align-items: center;
 }
 
 .form-item input {
-  width: 100%;
   padding: 10px;
   background-color: white;
   color: black;
+  border-radius: 10px;
+  font-size: 1rem;
+}
+
+.form-item label {
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 25px;
+  max-height: 250px;
+  background-color: white;
+  color: black;
+  font: inherit;
+  padding: 5px;
+}
+
+.general-form {
+  width: 90%;
+  padding: 0 20px 0 20px;
+  align-self: start;
+}
+
+/* Education Editor */
+.education-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.education-form > .form-item > label {
+  color: white;
+}
+
+.education-form > .submitBtn {
+  background-color: var(--secondary-color);
+  color: black;
+}
+
+.education-form {
+  background-color: var(--primary-color);
+  border-radius: 25px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.formBtns {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 5px;
+}
+
+/* Experience Editor */
+.experience-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.experience-form > .form-item > label {
+  color: white;
+}
+
+.experience-form > .submitBtn {
+  background-color: var(--secondary-color);
+  color: black;
+}
+
+.experience-form {
+  background-color: var(--primary-color);
+  border-radius: 25px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Buttons */
@@ -109,12 +167,56 @@ ul {
   padding: 10px;
 }
 
-button:hover {
+.submitBtn, .editBtn, .addBtn:hover {
   cursor: pointer;
   background-color: var(--hover-color);
 }
 
+.addBtn {
+  background-color: green;
+  min-width: 350px;
+  border-radius: 25px;
+  margin-top: 10px;
+  min-height: 45px;
+}
+
+.submitBtn, .cancelBtn {
+  background-color: var(--secondary-color);
+  color: black;
+  font-weight: bold;
+}
+
+.removeBtn {
+  background-color: red;
+}
+
+.dropDownBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dropDownOpenIcon, .dropDownCloseIcon, .removeIcon {
+  height: 30px;
+  width: 30px;
+}
+
+.dropdownBtn {
+  cursor: pointer;
+}
+
+.experience-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
 /* CV Display */
+
+.CV-container {
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  margin: 30px;
+}
 
 .CV-general, .CV-education-item, .CV-experience-item, .CV-education {
   display: flex;
@@ -122,7 +224,6 @@ button:hover {
   align-items: center;
   background-color: white;
   color: black;
-  border: 1px solid red;
 }
 
 .CV-name {
@@ -140,8 +241,10 @@ button:hover {
   display: flex;
   color: white;
   justify-content: space-around;
-  width: 400px;
+  align-items: center;
+  min-width: 350px;
   border-radius: 25px;
+  min-height: 45px;
 }
 
 .pill:hover {

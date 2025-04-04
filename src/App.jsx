@@ -4,8 +4,7 @@ import { ExpandToggle } from './components/ExpandToggle.jsx';
 import { GeneralEditor } from './components/GeneralEditor.jsx';
 import { EducationEditor } from './components/EducationEditor.jsx';
 import { ExperienceEditor } from './components/ExperienceEditor.jsx';
-
-import { CVGeneral, CVEducation, CVExperience } from './components/CV.jsx';
+import { CVDisplay } from './components/CV.jsx';
 
 
 function App() {
@@ -21,8 +20,8 @@ function App() {
       key: crypto.randomUUID(),
       school: 'Pirate University',
       degree: 'Haki',
-      startDate: '01-01-1991',
-      endDate: '01-01-1994',
+      startDate: 'May 1991',
+      endDate: 'Jan 1994',
       location: 'Grand Line',
     },
   ]);
@@ -32,8 +31,8 @@ function App() {
       key: crypto.randomUUID(),
       company: 'Straw Hat Pirates',
       position: 'Captain',
-      startDate: '01-01-1991',
-      endDate: '01-01-1994',
+      startDate: 'Jan 1991',
+      endDate: 'Jan 1994',
       location: 'Whole Cake Island',
       description: 'Defeated the Big Mom Pirates with my Gum Gum Bazooka'
     },
@@ -62,24 +61,10 @@ function App() {
         </ExpandToggle>
       </div>
       <div className="right">
-        <CVGeneral generalInfo={generalInfo} />
-        <CVEducation educationInfo={educationInfo} />
-        <CVExperience experienceInfo={experienceInfo} />
+        <CVDisplay generalInfo={generalInfo} educationInfo={educationInfo} experienceInfo={experienceInfo} />
       </div>
     </>
   );
 }
 
 export default App
-
-{/*  
-   <Editor title="Experience">
-          <Form onSubmit={experienceForm.handleSubmit}>
-            <FormItem label="Company" input="company" value={experienceForm.formData.company} onChange={experienceForm.handleChange} />
-            <FormItem label="Position" input="position" value={experienceForm.formData.position} onChange={experienceForm.handleChange}/>
-            <FormItem label="Start Date" input="startDate" type="date" value={experienceForm.formData.startDate} onChange={experienceForm.handleChange} />
-            <FormItem label="End Date" input="endDate" type="date" value={experienceForm.formData.endDate} onChange={experienceForm.handleChange} />
-            <FormItem label="Location" input="location" value={experienceForm.formData.location} onChange={experienceForm.handleChange} />
-            <FormItem label="Description" input="description" type="textarea" value={experienceForm.formData.description} onChange={experienceForm.handleChange} />
-          </Form>
-        </Editor> */}
