@@ -11,7 +11,9 @@
   grid-template-columns: 1fr 2fr;
   gap: 30px;
   height: 100vh;
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-family:
+    "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans",
+    Arial, sans-serif;
 }
 
 ul {
@@ -182,20 +184,29 @@ button {
   gap: 20px;
 }
 
-.updateBtn, .editBtn, .removeBtn, .cancelBtn, .loadBtn, .downloadBtn {
+.updateBtn,
+.editBtn,
+.removeBtn,
+.cancelBtn,
+.loadBtn,
+.downloadBtn {
   background-color: var(--primary-color);
   border-color: none;
 }
 
-.clearBtn, .loadBtn, .downloadBtn {
+.clearBtn,
+.loadBtn,
+.downloadBtn {
   border-radius: 5px;
 }
 
-.loadBtn:hover, .downloadBtn:hover {
+.loadBtn:hover,
+.downloadBtn:hover {
   background-color: var(--hover-color);
 }
 
-.removeBtn, .clearBtn {
+.removeBtn,
+.clearBtn {
   background-color: rgba(220, 37, 37, 0.883);
 }
 
@@ -212,14 +223,15 @@ button {
   margin-top: 10px;
   min-height: 45px;
   color: white;
-  font-size: .85rem;
+  font-size: 0.85rem;
 }
 
 .addBtn:hover {
   background-color: rgb(78, 146, 78);
 }
 
-.updateBtn, .cancelBtn {
+.updateBtn,
+.cancelBtn {
   background-color: var(--secondary-color);
   color: black;
 }
@@ -229,7 +241,9 @@ button {
   background-color: rgb(217, 217, 217);
 }
 
-.updateBtn, .cancelBtn, .removeBtn {
+.updateBtn,
+.cancelBtn,
+.removeBtn {
   border-radius: 5px;
 }
 
@@ -240,7 +254,9 @@ button {
   justify-content: center;
 }
 
-.dropDownOpenIcon, .dropDownCloseIcon, .removeIcon {
+.dropDownOpenIcon,
+.dropDownCloseIcon,
+.removeIcon {
   height: 30px;
   width: 30px;
 }
@@ -282,7 +298,8 @@ button {
   gap: 20px;
 }
 
-.CV-education, .CV-experience {
+.CV-education,
+.CV-experience {
   margin-bottom: 40px;
 }
 
@@ -305,7 +322,8 @@ button {
   grid-template-columns: auto 200px;
 }
 
-.edu-school, .edu-dates {
+.edu-school,
+.edu-dates {
   grid-row: 1 / 2;
   display: flex;
   align-items: center;
@@ -319,7 +337,6 @@ button {
   align-items: center;
 }
 
-
 /* CV Experience*/
 
 .experience-item-display {
@@ -328,7 +345,8 @@ button {
   grid-template-columns: auto 200px;
 }
 
-.exp-company, .exp-dates {
+.exp-company,
+.exp-dates {
   grid-row: 1 / 2;
   display: flex;
   align-items: center;
@@ -361,7 +379,7 @@ button {
   min-width: 350px;
   border-radius: 25px;
   min-height: 45px;
-  font-size: .85rem;
+  font-size: 0.85rem;
 }
 
 .pill:hover {
