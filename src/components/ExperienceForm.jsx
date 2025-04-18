@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { DateInput } from './DateInput.jsx';
 import { RemoveButton } from './RemoveButton.jsx';
 
-function ExperienceForm({ experienceItem, onSubmit, handleRemoveExperience, handleCancelEdit }) {
+function ExperienceForm({ experienceItem, handleSubmit, handleRemoveExperience, handleCancelEdit }) {
     const [formData, setFormData] = useState({ ...experienceItem });
 
     const formatDate = (date) => {
@@ -27,13 +27,13 @@ function ExperienceForm({ experienceItem, onSubmit, handleRemoveExperience, hand
         }
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmitForm = (e) => {
         e.preventDefault();
-        onSubmit(formData);
+        handleSubmit(formData);
     };
 
     return (
-        <form className="experience-form" onSubmit={handleSubmit}>
+        <form className="experience-form" onSubmit={handleSubmitForm}>
             <div className="form-item">
                 <label>Company</label>
                     <input
@@ -84,7 +84,7 @@ function ExperienceForm({ experienceItem, onSubmit, handleRemoveExperience, hand
                     />
             </div>
             <div className="formBtns">
-                <button type='submit' className='submitBtn'>Update</button>
+                <button type='submit' className='updateBtn'>Update</button>
                 <button
                     type="button"
                     onClick={handleCancelEdit}
@@ -92,9 +92,9 @@ function ExperienceForm({ experienceItem, onSubmit, handleRemoveExperience, hand
                 >
                     Cancel
                 </button>
-                <RemoveButton 
-                    handleRemove={handleRemoveExperience}
-                />
+                {experienceItem.key && (
+                    <RemoveButton handleRemove={handleRemoveExperience} />
+                )}
             </div>
         </form>
     );

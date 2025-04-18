@@ -30,6 +30,11 @@ ul {
   background-color: rgb(223, 216, 208);
 }
 
+h1 {
+  padding: 0;
+  margin: 0 0 20px 0;
+}
+
 /* Editor */
 .editor {
   background-color: white;
@@ -54,15 +59,15 @@ ul {
   display: none;
 }
 
-.visible {
-  display: flex;
-}
-
 .editor-form {
   flex-direction: column;
   background-color: var(--secondary-color);
   align-items: center;
   padding: 20px 10px 10px 10px;
+}
+
+.editor-form.visible {
+  display: flex;
 }
 
 /* Forms */
@@ -71,7 +76,6 @@ ul {
   grid-template-columns: 90px auto;
   grid-template-rows: auto auto;
   gap: 8px;
-  padding-right: 20px;
   align-items: center;
 }
 
@@ -80,7 +84,7 @@ ul {
   background-color: white;
   color: black;
   border-radius: 10px;
-  font-size: 1rem;
+  font-size: 0.85rem;
 }
 
 .form-item label {
@@ -95,6 +99,7 @@ textarea {
   background-color: white;
   color: black;
   font: inherit;
+  font-size: 0.85rem;
   padding: 5px;
 }
 
@@ -116,7 +121,7 @@ textarea {
   color: white;
 }
 
-.education-form > .submitBtn {
+.education-form > .updateBtn {
   background-color: var(--secondary-color);
   color: black;
 }
@@ -127,6 +132,7 @@ textarea {
   padding: 20px;
   display: flex;
   flex-direction: column;
+  min-width: 330px;
 }
 
 .formBtns {
@@ -138,8 +144,8 @@ textarea {
 /* Experience Editor */
 .experience-list {
   display: flex;
-  flex-direction: column;
   align-items: center;
+  flex-direction: column;
   gap: 10px;
 }
 
@@ -147,7 +153,7 @@ textarea {
   color: white;
 }
 
-.experience-form > .submitBtn {
+.experience-form > .updateBtn {
   background-color: var(--secondary-color);
   color: black;
 }
@@ -158,39 +164,77 @@ textarea {
   padding: 20px;
   display: flex;
   flex-direction: column;
+  min-width: 330px;
 }
 
 /* Buttons */
-
-.submitBtn, .editBtn, .addBtn, .removeBtn, .cancelBtn {
-  background-color: var(--primary-color);
+button {
+  all: unset;
+  cursor: pointer;
   padding: 10px;
 }
 
-.submitBtn, .editBtn, .addBtn:hover {
-  cursor: pointer;
+.config-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  margin-bottom: 20px;
+  gap: 20px;
+}
+
+.updateBtn, .editBtn, .removeBtn, .cancelBtn, .loadBtn, .downloadBtn {
+  background-color: var(--primary-color);
+  border-color: none;
+}
+
+.clearBtn, .loadBtn, .downloadBtn {
+  border-radius: 5px;
+}
+
+.loadBtn:hover, .downloadBtn:hover {
   background-color: var(--hover-color);
+}
+
+.removeBtn, .clearBtn {
+  background-color: rgba(220, 37, 37, 0.883);
+}
+
+.removeBtn:hover,
+.clearBtn:hover {
+  background-color: rgb(222, 61, 61);
 }
 
 .addBtn {
   background-color: green;
-  min-width: 350px;
+  max-width: 350px;
+  padding: 0px 15px 0px 15px;
   border-radius: 25px;
   margin-top: 10px;
   min-height: 45px;
+  color: white;
+  font-size: .85rem;
 }
 
-.submitBtn, .cancelBtn {
+.addBtn:hover {
+  background-color: rgb(78, 146, 78);
+}
+
+.updateBtn, .cancelBtn {
   background-color: var(--secondary-color);
   color: black;
-  font-weight: bold;
 }
 
-.removeBtn {
-  background-color: red;
+.updateBtn:hover,
+.cancelBtn:hover {
+  background-color: rgb(217, 217, 217);
+}
+
+.updateBtn, .cancelBtn, .removeBtn {
+  border-radius: 5px;
 }
 
 .dropDownBtn {
+  padding: 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -201,33 +245,36 @@ textarea {
   width: 30px;
 }
 
-.dropdownBtn {
-  cursor: pointer;
-}
-
-.experience-list {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
 /* CV Display */
 
 .CV-container {
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   margin: 30px;
+  background-color: white;
+  color: black;
+  padding: 25px 80px 25px 80px;
 }
 
-.CV-general, .CV-education-item, .CV-experience-item, .CV-education {
+.CV-section-header {
+  font-size: 2rem;
+  text-align: left;
+}
+
+/* CV General */
+
+.CV-general {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: white;
-  color: black;
+  margin-bottom: 20px;
+}
+
+.CV-header {
+  margin-bottom: 5px;
 }
 
 .CV-name {
-  font-size: 4rem;
+  font-size: 3rcap;
 }
 
 .CV-info {
@@ -235,16 +282,86 @@ textarea {
   gap: 20px;
 }
 
+.CV-education, .CV-experience {
+  margin-bottom: 40px;
+}
+
+.CV-section-line {
+  width: 100%;
+  height: 2px;
+  background-color: black;
+  margin-top: 4px;
+}
+
+.CV-section-header {
+  font-size: 1.7rem;
+}
+
+/* CV Education*/
+
+.education-item-display {
+  display: grid;
+  grid-template-rows: 25px 25px;
+  grid-template-columns: auto 200px;
+}
+
+.edu-school, .edu-dates {
+  grid-row: 1 / 2;
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.edu-degree {
+  grid-row: 2 / 3;
+  display: flex;
+  align-items: center;
+}
+
+
+/* CV Experience*/
+
+.experience-item-display {
+  display: grid;
+  grid-template-rows: 25px 25px auto;
+  grid-template-columns: auto 200px;
+}
+
+.exp-company, .exp-dates {
+  grid-row: 1 / 2;
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.exp-position {
+  grid-row: 2 / 3;
+  display: flex;
+  align-items: center;
+  font-style: italic;
+  font-size: 1.1rem;
+}
+
+.exp-desc {
+  grid-row: 3 / 4;
+  grid-column: 1 / 3;
+}
+
 /* Pill */
 .pill {
   background-color: var(--primary-color);
-  display: flex;
+  display: grid;
+  grid-template-columns: auto 130px;
   color: white;
-  justify-content: space-around;
+  justify-content: space-between;
+  padding: 0px 15px 0px 15px;
   align-items: center;
   min-width: 350px;
   border-radius: 25px;
   min-height: 45px;
+  font-size: .85rem;
 }
 
 .pill:hover {

@@ -4,6 +4,7 @@ import { Pill } from './Pill.jsx';
 
 function EducationEditor({ info, setInfo }) {
     const [activeKey, setActiveKey] = useState(null);
+    const [showNewForm, setShowNewForm] = useState(false);
 
     const handleChange = (index, e) => {
         const updatedEducationInfo = [...info];
@@ -11,32 +12,22 @@ function EducationEditor({ info, setInfo }) {
         setInfo(updatedEducationInfo);
     };
 
-    const handleSubmit = (updatedItem) => {
-        console.log('Education Updated Item before submitting', updatedItem);
-        const updatedEducationInfo = info.map((educationItem) =>
-            educationItem.key === updatedItem.key ? updatedItem : educationItem
-        );
-
-        setInfo(updatedEducationInfo);
+    const handleSubmit = (item) => {
+        if (item.key !== null) {
+            const updatedEducationInfo = info.map((educationItem) =>
+                educationItem.key === item.key ? item : educationItem
+            );
+            setInfo(updatedEducationInfo);
+        } else {
+            const newItem = {...item, key: crypto.randomUUID()}
+            setInfo(prevInfo => [...prevInfo, newItem]);
+            setShowNewForm(false);
+        }
         setActiveKey(null);
     };
-    
-    const handleAddEducation = () => {
-        const newEducationItem = {
-            key: crypto.randomUUID(),
-            school: "",
-            degree: "",
-            startDate: "",
-            endDate: "",
-            location: "",
-        }
 
-        setInfo([...info, newEducationItem]);
-        setActiveKey(newEducationItem.key);
-    };
-
-    const handleEditEducation = (index) => {
-        setActiveKey(index);
+    const handleEditEducation = (key) => {
+        setActiveKey(key);
     };
 
     const handleCancelEdit = (originalItem) => {
@@ -46,7 +37,16 @@ function EducationEditor({ info, setInfo }) {
             )
         );
         setActiveKey(null);
-    }
+    };
+
+    const handleCancelNew = () => {
+        setShowNewForm(false);
+    };
+
+    const handleAddEducation = () => {
+        setShowNewForm(true);
+        setActiveKey(null);
+    };
 
     const handleRemoveEducation = (keyToRemove) => {
         const updatedEducationInfo = info.filter((educationItem) => educationItem.key !== keyToRemove);
@@ -68,7 +68,7 @@ function EducationEditor({ info, setInfo }) {
                                 <EducationForm
                                     educationItem={educationItem}
                                     onChange={(e) => handleChange(index, e)}
-                                    onSubmit={handleSubmit}
+                                    handleSubmit={handleSubmit}
                                     handleRemoveEducation={() => handleRemoveEducation(educationItem.key)}
                                     handleCancelEdit={() => handleCancelEdit(educationItem)}
                                 />
@@ -82,9 +82,27 @@ function EducationEditor({ info, setInfo }) {
                             )}
                         </li>
                     ))}
-                     <button className="addBtn" onClick={handleAddEducation}>
-                        Add Education
-                    </button>
+                    {showNewForm && (
+                    <li className="education-item">
+                        <EducationForm
+                            educationItem={{
+                                key: null,
+                                school: "",
+                                degree: "",
+                                startDate: "",
+                                endDate: "",
+                                location: "",
+                            }}
+                            handleSubmit={handleSubmit}
+                            handleCancelEdit={handleCancelNew}
+                        />
+                    </li>
+                    )}
+                     {!showNewForm && (
+                        <button className="addBtn" onClick={handleAddEducation}>
+                            Add Education
+                        </button>
+                    )}
                 </ul>
             </>
         </>

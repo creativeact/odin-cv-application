@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { DateInput } from './DateInput.jsx';
 import { RemoveButton } from './RemoveButton.jsx';
 
-function EducationForm({ educationItem, onSubmit, handleRemoveEducation, handleCancelEdit }) {
+function EducationForm({ educationItem, handleSubmit, handleRemoveEducation, handleCancelEdit }) {
     const [formData, setFormData] = useState({ ...educationItem });
 
     const formatDate = (date) => {
@@ -27,14 +27,14 @@ function EducationForm({ educationItem, onSubmit, handleRemoveEducation, handleC
         }
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmitForm = (e) => {
         e.preventDefault();
-        onSubmit(formData);
+        handleSubmit(formData);
     };
 
     return (
-        <form className="education-form" onSubmit={handleSubmit}>
-            <div className="form-item school">
+        <form className="education-form" onSubmit={handleSubmitForm}>
+            <div className="form-item">
                 <label>School</label>
                     <input
                         type="text"
@@ -44,7 +44,7 @@ function EducationForm({ educationItem, onSubmit, handleRemoveEducation, handleC
                         onChange={handleChange} 
                     />
             </div>
-            <div className="form-item degree">
+            <div className="form-item">
                 <label>Degree</label>
                     <input
                         type="text"
@@ -53,21 +53,21 @@ function EducationForm({ educationItem, onSubmit, handleRemoveEducation, handleC
                         onChange={handleChange} 
                     />
             </div>
-            <div className="form-item start">
+            <div className="form-item">
                 <label>Start Date</label>
                 <DateInput
                     selectedDate={formData.startDate}
                     onChange={(date) => handleChange(date, "startDate")}
                 />
             </div>
-            <div className="form-item end">
+            <div className="form-item">
                 <label>End Date</label>
                 <DateInput
                     selectedDate={formData.endDate}
                     onChange={(date) => handleChange(date, "endDate")}
                 />
             </div>
-            <div className="form-item location">
+            <div className="form-item">
                 <label>Location</label>
                     <input
                         type="text"
@@ -77,7 +77,12 @@ function EducationForm({ educationItem, onSubmit, handleRemoveEducation, handleC
                     />
             </div>
             <div className="formBtns">
-                <button type='submit' className='submitBtn'>Update</button>
+                <button 
+                    type='submit' 
+                    className='updateBtn'
+                    >
+                        Update
+                    </button>
                 <button
                     type="button"
                     onClick={handleCancelEdit}
@@ -85,9 +90,9 @@ function EducationForm({ educationItem, onSubmit, handleRemoveEducation, handleC
                 >
                     Cancel
                 </button>
-                <RemoveButton 
-                    handleRemove={handleRemoveEducation}
-                />
+                {educationItem.key && (
+                    <RemoveButton handleRemove={handleRemoveEducation} />
+                )}
             </div>
         </form>
     );

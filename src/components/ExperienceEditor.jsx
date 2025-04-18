@@ -4,6 +4,7 @@ import { Pill } from './Pill.jsx';
 
 function ExperienceEditor({ info, setInfo }) {
     const [activeKey, setActiveKey] = useState(null);
+    const [showNewForm, setShowNewForm] = useState(false);
 
     const handleChange = (index, e) => {
         const updatedExperienceInfo = [...info];
@@ -11,36 +12,41 @@ function ExperienceEditor({ info, setInfo }) {
         setInfo(updatedExperienceInfo);
     };
 
-    const handleSubmit = (updatedItem) => {
-        const updatedExperienceInfo = info.map((experienceItem) =>
-            experienceItem.key === updatedItem.key ? updatedItem : experienceItem
-        );
-
-        setInfo(updatedExperienceInfo);
+    const handleSubmit = (item) => {
+        if (item.key !== null) {
+            const updatedExperienceInfo = info.map((experienceItem) =>
+                experienceItem.key === item.key ? item : experienceItem
+            );
+            setInfo(updatedExperienceInfo);
+        } else {
+            const newItem = {...item, key: crypto.randomUUID()}
+            setInfo(prevInfo => [...prevInfo, newItem]);
+            setShowNewForm(false);
+        }
         setActiveKey(null);
     };
     
-    const handleAddExperience = () => {
-        const newExperienceItem = {
-            key: crypto.randomUUID(),
-            school: "",
-            degree: "",
-            startDate: "",
-            endDate: "",
-            location: "",
-        }
-
-        setInfo([...info, newExperienceItem]);
-        setActiveKey(newExperienceItem.key);
+    const handleEditExperience = (key) => {
+        setActiveKey(key);
     };
 
-    const handleEditExperience = (index) => {
-        setActiveKey(index);
-    };
-
-    const handleCancelEdit = () => {
+    const handleCancelEdit = (originalItem) => {
+        setInfo((prevInfo) =>
+            prevInfo.map((item) =>
+                item.key === originalItem.key ? originalItem : item
+            )
+        );
         setActiveKey(null);
     }
+
+    const handleCancelNew = () => {
+        setShowNewForm(false);
+    };
+
+    const handleAddExperience = () => {
+        setShowNewForm(true);
+        setActiveKey(null);
+    };
 
     const handleRemoveExperience = (keyToRemove) => {
         const updatedExperienceInfo = info.filter((experienceItem) => experienceItem.key !== keyToRemove);
@@ -53,7 +59,7 @@ function ExperienceEditor({ info, setInfo }) {
     };
 
     return (
-        <div className="experience-editor">
+        <>
             <>
                 <ul className="experience-list">
                     {info.map((experienceItem, index) => (
@@ -62,7 +68,7 @@ function ExperienceEditor({ info, setInfo }) {
                                 <ExperienceForm
                                     experienceItem={experienceItem}
                                     onChange={(e) => handleChange(index, e)}
-                                    onSubmit={handleSubmit}
+                                    handleSubmit={handleSubmit}
                                     handleRemoveExperience={() => handleRemoveExperience(experienceItem.key)}
                                     handleCancelEdit={() => handleCancelEdit(experienceItem)}
                                 />
@@ -76,13 +82,31 @@ function ExperienceEditor({ info, setInfo }) {
                             )}
                         </li>
                     ))}
+                    {showNewForm && (
+                    <li className="experience-item">
+                        <ExperienceForm
+                            experienceItem={{
+                                key: null,
+                                company: "",
+                                position: "",
+                                startDate: "",
+                                endDate: "",
+                                location: "",
+                                description: "",
+                            }}
+                            handleSubmit={handleSubmit}
+                            handleCancelEdit={handleCancelNew}
+                        />
+                    </li>
+                    )}
+                     {!showNewForm && (
+                        <button className="addBtn" onClick={handleAddExperience}>
+                            Add Experience
+                        </button>
+                    )}
                 </ul>
             </>
-    
-            <button className="addBtn" onClick={handleAddExperience}>
-                Add Experience
-            </button>
-        </div>
+        </>
     );
 }
 
